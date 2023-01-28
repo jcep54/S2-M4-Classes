@@ -44,7 +44,23 @@ class Airplane {
 */
 
 class Person {
-  
+  constructor(name, age){
+    this.name = name;
+    this.age = age;
+    this.stomach = [];
+  }
+
+  eat(food){
+    if (this.stomach.length != 10){
+      this.stomach.push(food);
+    }
+  }
+  poop(){
+    this.stomach = [];
+  }
+  toString(){
+    return `${this.name},${this.age}`;
+  }
 }
 
 /*
@@ -62,7 +78,27 @@ class Person {
 */
 
 class Car {
-  
+  constructor(model, milesPerGallon){
+    this.model = model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
+  }
+
+  fill(gallons){
+    this.tank += gallons;
+  }
+
+  drive(distance){
+    if (distance <= this.milesPerGallon * this.tank){
+    this.odometer += distance;
+    this.tank -= distance / this.milesPerGallon;
+  }else {
+    this.odometer += this.milesPerGallon * this.tank;
+    this.tank = 0;
+    return console.log(`I ran out of fuel at ${this.odometer} miles`);
+    }
+  }
 }
 
 /*
@@ -79,7 +115,14 @@ class Car {
 */
 
 class Lambdasian {
-  
+  constructor(obj){
+    this.name = obj.name;
+    this.age = obj.age;
+    this.location = obj.location;
+  }
+  speak(){
+    return `Hello my name is ${this.name}, and I am from ${this.location}`;
+  }
 }
 
 /*
@@ -97,8 +140,19 @@ class Lambdasian {
         + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
 */
 
-class Instructor {
-
+class Instructor extends Lambdasian {
+  constructor(obj){
+    super(obj);
+    this.specialty = obj.specialty;
+    this.favLanguage = obj.favLanguage;
+    this.catchPhrase = obj.catchPhrase;
+  }
+  demo(subject){
+    return `Today we are learning about ${subject}`;
+  }
+  grade(student,subject){
+    return `${student.name} receives a perfect score on ${subject}`
+  }
 }
 
 /*
@@ -117,8 +171,28 @@ class Instructor {
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
 
-class Student {
+class Student extends Lambdasian{
+   constructor(obj){
+    super(obj);
+    this.previousBackground = obj.previousBackground;
+    this.className = obj.className;
+    this.favSubjects = obj.favSubjects;
+   }
+
+   listSubjects(){
+    let subString = 'Loving ';
+    for (let i = 0; i < this.favSubjects.length; i++){
+      subString += (`${this.favSubjects[i]} `);
+    }
+   return subString;
+   }
    
+   PRAssignment(subject){
+    return `${this.name} has submitted a PR for ${subject}`
+   }
+   sprintChallenge(subject){
+    return `${this.name} has begun sprint challenge on ${subject}`
+   }
 }
 
 /*
