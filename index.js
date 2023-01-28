@@ -97,7 +97,7 @@ class Car {
   }else {
     this.odometer += this.milesPerGallon * this.tank;
     this.tank = 0;
-    return console.log(`I ran out of fuel at ${this.odometer} miles`);
+    return (`I ran out of fuel at ${this.odometer} miles!`);
     }
   }
 }
